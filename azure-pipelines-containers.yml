@@ -24,7 +24,7 @@ stages:
         containerRegistry: 'ragc-vuepoc-acr'
         repository: 'vuepoc/hello-world/nginx'
         command: 'buildAndPush'
-        Dockerfile: '**/Blessed.Build.Dockerfile'
+        Dockerfile: '**/Dockerfile'
         buildContext: 'hello-world'
         tags: $(Build.BuildId)
         addPipelineData: true
@@ -33,16 +33,16 @@ stages:
     #   displayName: Blessed Source
     #   inputs:
     #     containerRegistry: 'ragc-vuepoc-acr'
-    #     repository: 'vuepoc-blessed-source'
+    #     repository: 'vuepoc/hello-world/blessed-source'
     #     command: 'buildAndPush'
-    #     Dockerfile: '**/Blessed.Build.Dockerfile'
+    #     Dockerfile: '**/Blessed.Source.Dockerfile'
     #     buildContext: 'hello-world'
 
     # - task: Docker@2
     #   displayName: Blessed Build
     #   inputs:
     #     containerRegistry: 'ragc-vuepoc-acr'
-    #     repository: 'vuepoc-blessed-build'
+    #     repository: 'vuepoc/hello-world/blessed-build
     #     command: 'buildAndPush'
     #     Dockerfile: '**/Blessed.Build.Dockerfile'
     #     buildContext: 'hello-world'
@@ -72,6 +72,5 @@ stages:
               DockerNamespace: 'ragcvuepoc.azurecr.io'
               DockerRepository: 'vuepoc/hello-world/nginx'
               DockerImageTag: '$(Build.BuildId)'
-              StartupCommand: 'npx serve -s'
 
 
