@@ -21,3 +21,5 @@ steps:
     npm audit
     npm run build
   displayName: 'npm install and build'
+  workingDirectory: hello-world/
+
