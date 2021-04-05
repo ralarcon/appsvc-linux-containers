@@ -42,7 +42,7 @@ stages:
 
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: ' $(Build.ArtifactStagingDirectory)/dist.zip'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist.zip'
         ArtifactName: 'drop'
         publishLocation: 'Container'
   
@@ -68,7 +68,7 @@ stages:
               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
               appType: 'webAppLinux'
               WebAppName: 'ragc-vuepoc-appsvc'
-              packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              packageForLinux: '$(Pipeline.Workspace)/drop/dist.zip'
               RuntimeStack: 'NODE|14-lts'
               StartupCommand: 'pm2 serve /home/site/wwwroot --no-daemon'
 
