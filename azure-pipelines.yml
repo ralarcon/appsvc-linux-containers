@@ -16,9 +16,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm audit
     npm install
-    npm audit
     npm run build
   displayName: 'npm install and build'
   workingDirectory: hello-world/
