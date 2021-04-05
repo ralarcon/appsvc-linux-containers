@@ -47,30 +47,30 @@ stages:
     #     Dockerfile: '**/Blessed.Build.Dockerfile'
     #     buildContext: 'hello-world'
 
-- stage: DeployAppSvcLinux
-  displayName: Deploy AppSvc Linux Web
-  dependsOn: Build
-  condition: succeeded()
+# - stage: DeployAppSvcLinux
+#   displayName: Deploy AppSvc Linux Web
+#   dependsOn: Build
+#   condition: succeeded()
 
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    environment: 'VuePoC-AppSvcLinuxWebApp'
-    pool:
-      vmImage: $(vmImageName)
+#   jobs:
+#   - deployment: Deploy
+#     displayName: Deploy
+#     environment: 'VuePoC-AppSvcLinuxWebApp'
+#     pool:
+#       vmImage: $(vmImageName)
 
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureRmWebAppDeployment@4
-            inputs:
-              ConnectionType: 'AzureRM'
-              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
-              appType: 'webAppLinux'
-              WebAppName: 'ragc-vuepoc-appsvc'
-              packageForLinux: '$(Pipeline.Workspace)/drop/dist.zip'
-              RuntimeStack: 'NODE|14-lts'
-              StartupCommand: 'pm2 serve /home/site/wwwroot --no-daemon'
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - task: AzureRmWebAppDeployment@4
+#             inputs:
+#               ConnectionType: 'AzureRM'
+#               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
+#               appType: 'webAppLinux'
+#               WebAppName: 'ragc-vuepoc-appsvc'
+#               packageForLinux: '$(Pipeline.Workspace)/drop/dist.zip'
+#               RuntimeStack: 'NODE|14-lts'
+#               StartupCommand: 'npx serve -s'
 
 
