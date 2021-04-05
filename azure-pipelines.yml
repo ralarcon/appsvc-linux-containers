@@ -9,15 +9,94 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.x'
-  displayName: 'Install Node.js'
+stages:
+- stage: Build
+  displayName: Build stage
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
-  workingDirectory: hello-world/
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '14.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm install
+        npm run build
+      displayName: 'npm install and build'
+      workingDirectory: hello-world
+  
+    - task: ArchiveFiles@2
+      displayName: 'Archive files'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/hello-world/dist'
+        includeRootFolder: false
+        archiveType: zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/dist.zip
+        replaceExistingArchive: true
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: ' $(Build.ArtifactStagingDirectory)/dist.zip'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+  
+- stage: DeployAppSvcLinux
+  displayName: Deploy AppSvc Linux Web
+  dependsOn: Build
+  condition: succeeded()
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    environment: 'VuePoC-AppSvcLinuxWebApp'
+    pool:
+      vmImage: $(vmImageName)
+
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
+              appType: 'webAppLinux'
+              WebAppName: 'ragc-vuepoc-appsvc'
+              packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              RuntimeStack: 'NODE|14-lts'
+              StartupCommand: 'pm2 serve /home/site/wwwroot --no-daemon'
+
+
+    # - task: Docker@2
+    #   displayName: Nginx + Build
+    #   inputs:
+    #     containerRegistry: 'ragc-vuepoc-acr'
+    #     repository: 'vuepoc-nginx-source'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '**/Blessed.Build.Dockerfile'
+    #     buildContext: 'hello-world'
+
+    # - task: Docker@2
+    #   displayName: Blessed Source
+    #   inputs:
+    #     containerRegistry: 'ragc-vuepoc-acr'
+    #     repository: 'vuepoc-blessed-source'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '**/Blessed.Build.Dockerfile'
+    #     buildContext: 'hello-world'
+
+    # - task: Docker@2
+    #   displayName: Blessed Build
+    #   inputs:
+    #     containerRegistry: 'ragc-vuepoc-acr'
+    #     repository: 'vuepoc-blessed-build'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '**/Blessed.Build.Dockerfile'
+    #     buildContext: 'hello-world'
 
