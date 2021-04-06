@@ -29,33 +29,15 @@ stages:
         tags: $(Build.BuildId)
         addPipelineData: true
 
-    # - task: Docker@2
-    #   displayName: Blessed Source
-    #   inputs:
-    #     containerRegistry: 'ragc-vuepoc-acr'
-    #     repository: 'vuepoc/hello-world/blessed-source'
-    #     command: 'buildAndPush'
-    #     Dockerfile: '**/Blessed.Source.Dockerfile'
-    #     buildContext: 'hello-world'
-
-    # - task: Docker@2
-    #   displayName: Blessed Build
-    #   inputs:
-    #     containerRegistry: 'ragc-vuepoc-acr'
-    #     repository: 'vuepoc/hello-world/blessed-build
-    #     command: 'buildAndPush'
-    #     Dockerfile: '**/Blessed.Build.Dockerfile'
-    #     buildContext: 'hello-world'
-
 - stage: DeployAppSvcLinux
-  displayName: Deploy AppSvc Linux Web
+  displayName: Deploy Nginx Container
   dependsOn: Build
   condition: succeeded()
 
   jobs:
   - deployment: Deploy
     displayName: Deploy
-    environment: 'VuePoC-AppSvcLinuxWebApp'
+    environment: 'VuePoC-AppSvcLinuxContainer-Nginx'
     pool:
       vmImage: $(vmImageName)
 
