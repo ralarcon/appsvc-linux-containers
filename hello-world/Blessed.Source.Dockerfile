@@ -8,4 +8,4 @@ RUN npm run build
 
 EXPOSE 8080
 #FOR NODE 12 ENTRYPOINT [ "pm2", "serve", "/home/site/wwwroot/dist", "--no-daemon" ]
-ENTRYPOINT [ "npx", "serve", "-s" ]
+ENTRYPOINT [ "npx", "serve", "-s", "/home/site/wwwroot/dist" ]
