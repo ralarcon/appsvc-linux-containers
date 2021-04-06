@@ -1,0 +1,57 @@
+# Node.js with Vue
+# Build a Node.js project that uses Vue.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger: none
+
+variables:
+  vmImageName: ubuntu-latest
+
+stages:
+- stage: Build
+  displayName: Build stage
+
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: Docker@2
+      displayName: Blessed Source
+      inputs:
+        containerRegistry: 'ragc-vuepoc-acr'
+        repository: 'vuepoc/hello-world/blessed-source'
+        command: 'buildAndPush'
+        Dockerfile: '**/Blessed.Source.Dockerfile'
+        buildContext: 'hello-world'
+
+- stage: DeployLinuxContainerBlessedSource
+  displayName: Deploy Blessed Source Container
+  dependsOn: Build
+  condition: succeeded()
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    environment: 'VuePoC-AppSvcLinuxContainer-BlessedSource'
+    pool:
+      vmImage: $(vmImageName)
+
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
+              appType: 'webAppContainer'
+              WebAppName: 'ragc-vuepoc-nginx-container'
+              DockerNamespace: 'ragcvuepoc.azurecr.io'
+              DockerRepository: 'vuepoc/hello-world/nginx'
+              DockerImageTag: '$(Build.BuildId)'
+
+
