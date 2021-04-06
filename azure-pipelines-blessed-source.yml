@@ -49,9 +49,9 @@ stages:
               ConnectionType: 'AzureRM'
               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
               appType: 'webAppContainer'
-              WebAppName: 'ragc-vuepoc-blessedbuild-container'
+              WebAppName: 'ragc-vuepoc-blessedsource-container'
               DockerNamespace: 'ragcvuepoc.azurecr.io'
-              DockerRepository: 'vuepoc/hello-world/nginx'
+              DockerRepository: 'vuepoc/hello-world/blessed-source'
               DockerImageTag: '$(Build.BuildId)'
 
 
