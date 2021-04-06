@@ -51,7 +51,7 @@ stages:
               appType: 'webAppContainer'
               WebAppName: 'ragc-vuepoc-blessedbuild-container'
               DockerNamespace: 'ragcvuepoc.azurecr.io'
-              DockerRepository: 'vuepoc/hello-world/nginx'
+              DockerRepository: 'vuepoc/hello-world/blessed-source'
               DockerImageTag: '$(Build.BuildId)'
 
 
