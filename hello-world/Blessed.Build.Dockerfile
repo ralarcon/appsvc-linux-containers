@@ -18,10 +18,9 @@ FROM mcr.microsoft.com/appsvc/node:14-lts_20200522.6 as production-stage
 RUN mkdir /app
 COPY --from=build-stage /app/dist /home/site/wwwroot
 
-COPY ./startup.blessed.build.sh /opt/startup
-
-RUN chmod +x /opt/startup/startup.blessed.build.sh
+COPY ./startup.blessed.build.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/startup.blessed.build.sh
 
 EXPOSE 8080 2222
 # FOR NODE 12: ENTRYPOINT [ "pm2", "serve", "/home/site/wwwroot", "--no-daemon" ]
-ENTRYPOINT [ "/opt/startup/startup.blessed.build.sh" ]
+ENTRYPOINT [ "/usr/local/bin/startup.blessed.build.sh" ]
