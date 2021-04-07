@@ -18,6 +18,8 @@ FROM mcr.microsoft.com/appsvc/node:14-lts_20200522.6 as production-stage
 RUN mkdir /app
 COPY --from=build-stage /app/dist /home/site/wwwroot
 
+COPY ./startup.blessed.build.sh /opt/startup
+
 EXPOSE 8080 2222
 # FOR NODE 12: ENTRYPOINT [ "pm2", "serve", "/home/site/wwwroot", "--no-daemon" ]
-ENTRYPOINT [ "npx", "serve", "", "-s" ]
+ENTRYPOINT [ "/opt/startup/startup.blessed.build.sh" ]
