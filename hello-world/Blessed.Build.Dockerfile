@@ -20,6 +20,8 @@ COPY --from=build-stage /app/dist /home/site/wwwroot
 
 COPY ./startup.blessed.build.sh /opt/startup
 
+RUN chmod +x /opt/startup/startup.blessed.build.sh
+
 EXPOSE 8080 2222
 # FOR NODE 12: ENTRYPOINT [ "pm2", "serve", "/home/site/wwwroot", "--no-daemon" ]
 ENTRYPOINT [ "/opt/startup/startup.blessed.build.sh" ]
