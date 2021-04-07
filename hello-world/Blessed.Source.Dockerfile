@@ -6,8 +6,8 @@ RUN npm install
 COPY ./ .
 RUN npm run build
 
-COPY ./startup.blessed.build.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/startup.blessed.build.sh
+COPY ./startup.blessed.source.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/startup.blessed.source.sh
 
 EXPOSE 8080 2222
 ENTRYPOINT [ "/usr/local/bin/startup.blessed.source.sh" ]
