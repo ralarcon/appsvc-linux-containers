@@ -48,7 +48,7 @@ stages:
           - task: AzureWebAppContainer@1
             inputs:
               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
-              appName: 'ragc-vuepoc-blessedsource-container'
+              appName: 'ragc-vuepoc-nginx-container'
               containers: 'ragcvuepoc.azurecr.io/vuepoc/hello-world/nginx:$(Build.BuildId)'
 
 
