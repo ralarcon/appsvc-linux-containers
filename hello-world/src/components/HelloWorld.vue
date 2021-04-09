@@ -31,15 +31,28 @@
   <div class="demo">
     <p>Using mustaches: {{ rawHtml }}</p>
     <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+    <p>Docker Image: {{ imageInfo }}</p>
+    <p>Computer: {{ computer }}</p>
+    <p>Mode: {{ mode }}</p>
+    <p>BasePath: {{ url }}</p>
   </div>
 </template>
 
 <script>
+import getEnv from '@/utils/env'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String,
     rawHtml: String
+  },
+  data() { 
+    return { 
+        imageInfo: getEnv('VUE_APP_DOCKER_IMAGE'), 
+        computer: getEnv('VUE_APP_COMPUTER'),
+        mode: getEnv('NODE_ENV'),  
+        url: getEnv('BASE_URL')   
+    }
   }
 }
 </script>
