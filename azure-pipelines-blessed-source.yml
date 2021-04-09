@@ -44,14 +44,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: AzureRmWebAppDeployment@4
+          - task: AzureWebAppContainer@1
             inputs:
-              ConnectionType: 'AzureRM'
               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
-              appType: 'webAppContainer'
-              WebAppName: 'ragc-vuepoc-blessedsource-container'
-              DockerNamespace: 'ragcvuepoc.azurecr.io'
-              DockerRepository: 'vuepoc/hello-world/blessed-source'
-              DockerImageTag: '$(Build.BuildId)'
+              appName: 'ragc-vuepoc-blessedsource-container'
+              containers: 'ragcvuepoc.azurecr.io/vuepoc/hello-world/blessed-source:$(Build.BuildId)'
 
 
