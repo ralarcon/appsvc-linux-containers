@@ -68,3 +68,4 @@ stages:
               appName: 'ragc-vuepoc-netcore'
               package: '$(Pipeline.Workspace)/drop/hello-world-net5.zip'
               runtimeStack: 'DOTNETCORE|5.0'
+              deploymentMethod: runFromPackage
