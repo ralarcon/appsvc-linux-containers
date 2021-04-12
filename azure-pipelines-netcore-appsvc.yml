@@ -44,7 +44,7 @@ stages:
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
+        ArtifactName: 'hello-world-net5'
   
 - stage: DeployAppSvcLinux
   displayName: Deploy AppSvc Linux Web
@@ -69,4 +69,4 @@ stages:
               appName: 'ragc-vuepoc-netcore'
               package: '$(Pipeline.Workspace)/drop/hello-world-net5.zip'
               runtimeStack: 'DOTNETCORE|5.0'
-              deploymentMethod: runFromPackage
+              deploymentMethod: zipDeploy
