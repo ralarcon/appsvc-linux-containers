@@ -37,6 +37,7 @@ stages:
         command: 'publish'
         publishWebProjects: true
         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: true
         workingDirectory: 'hello-world'
 
     - task: PublishBuildArtifacts@1
@@ -60,12 +61,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: AzureRmWebAppDeployment@4
+          - task: AzureWebApp@1
             inputs:
-              ConnectionType: 'AzureRM'
               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
               appType: 'webAppLinux'
-              WebAppName: 'ragc-vuepoc-netcore'
-              packageForLinux: '$(Pipeline.Workspace)/drop/hello-world-net5.zip'
-              DeploymentType: runFromZip
-              RuntimeStack: 'DOTNETCORE|5.0'
+              appName: 'ragc-vuepoc-netcore'
+              package: '$(Pipeline.Workspace)/drop/hello-world-net5.zip'
+              runtimeStack: 'DOTNETCORE|5.0'
