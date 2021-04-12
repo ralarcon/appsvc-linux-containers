@@ -35,10 +35,11 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'publish'
+        projects: 'hello-world-net5/*.csproj'
         publishWebProjects: true
         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
         zipAfterPublish: true
-        workingDirectory: 'hello-world'
+        workingDirectory: 'hello-world-net5'
 
     - task: PublishBuildArtifacts@1
       inputs:
