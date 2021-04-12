@@ -14,6 +14,5 @@ FROM build AS publish
 RUN dotnet publish "hello-world-net5.csproj" -c Release -o /app/publish
 
 FROM base AS final
-WORKDIR /app
+WORKDIR /home/site/wwwroot
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "hello-world-net5.dll"]
