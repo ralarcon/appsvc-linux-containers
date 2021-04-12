@@ -29,7 +29,7 @@ stages:
       inputs:
         command: 'build'
         projects: 'hello-world-net5/*.csproj'
-        arguments: '--configuration $(BuildConfiguration) -r linux-x64'
+        arguments: '--configuration $(BuildConfiguration)'
         workingDirectory: 'hello-world-net5'
     
     - task: DotNetCoreCLI@2
@@ -37,7 +37,7 @@ stages:
         command: 'publish'
         projects: 'hello-world-net5/*.csproj'
         publishWebProjects: true
-        arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory) -r linux-x64'
+        arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
         zipAfterPublish: True
         workingDirectory: 'hello-world-net5'
 
