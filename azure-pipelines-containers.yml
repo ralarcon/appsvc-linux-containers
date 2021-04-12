@@ -24,7 +24,7 @@ stages:
         containerRegistry: 'ragc-vuepoc-acr'
         repository: 'vuepoc/hello-world/nginx'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: 'hello-world/Dockerfile'
         buildContext: 'hello-world'
         tags: $(Build.BuildId)
         addPipelineData: true

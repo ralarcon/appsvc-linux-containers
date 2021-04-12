@@ -25,8 +25,10 @@ stages:
         containerRegistry: 'ragc-vuepoc-acr'
         repository: 'vuepoc/hello-world/blessed-source'
         command: 'buildAndPush'
-        Dockerfile: '**/Blessed.Source.Dockerfile'
+        Dockerfile: 'hello-world/Blessed.Source.Dockerfile'
         buildContext: 'hello-world'
+        tags: $(Build.BuildId)
+        addPipelineData: true
 
 - stage: DeployLinuxContainerBlessedSource
   displayName: Deploy Blessed Source Container

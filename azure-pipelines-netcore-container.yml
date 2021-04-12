@@ -25,8 +25,10 @@ stages:
         containerRegistry: 'ragc-vuepoc-acr'
         repository: 'vuepoc/hello-world-netcore/netcoreslim'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: 'hello-world-net5/Dockerfile'
         buildContext: 'hello-world-net5'
+        tags: $(Build.BuildId)
+        addPipelineData: true
 
 - stage: DeployLinuxContainerBlessedBuild
   displayName: Deploy Blessed Build Container
