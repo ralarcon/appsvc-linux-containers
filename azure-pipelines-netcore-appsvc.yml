@@ -28,7 +28,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
-        projects: '**/*.csproj'
+        projects: 'hello-world-net5/*.csproj'
         arguments: '--configuration $(BuildConfiguration)'
         workingDirectory: 'hello-world-net5'
     
