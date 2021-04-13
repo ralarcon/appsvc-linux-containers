@@ -34,7 +34,7 @@ stages:
         azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        inlineScript: 'az acr build --image netcore/hello-world-net5/default:$(Build.BuildId) --registry ragcvuepoc --file .\Dockerfile .'
+        inlineScript: 'az acr build --image netcore/hello-world-net5/default:$(Build.BuildId) --registry ragcvuepoc --file hello-world-net5/Dockerfile .'
         workingDirectory: 'hello-world-net5'
 
 
