@@ -9,9 +9,18 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
+    <h2>Computer Name</h2>
+    <p>@Model.ComputerName</p>
+
     <h2>Container Image</h2>
     <p>@Model.DockerImage</p>
 
-    <h3>Computer Name</h3>
-    <p>@Model.ComputerName</p>
+    <h3>Environment Vars</h3>
+    @foreach(string item in Model.EnvVars.Keys) 
+    {
+        <ul>
+            <p>@item = @Model.EnvVars[item]</p>
+        </ul>
+    }
+    
 </div>
