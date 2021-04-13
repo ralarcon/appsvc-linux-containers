@@ -37,7 +37,7 @@ stages:
 
   jobs:
   - deployment: Deploy
-    displayName: Deploy
+    displayName: Deploy Container
     environment: 'VuePoC-Net5-AppSvcLinux-DefaultContainer'
     pool:
       vmImage: $(vmImageName)
