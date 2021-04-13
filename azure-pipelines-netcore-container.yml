@@ -19,16 +19,24 @@ stages:
       vmImage: $(vmImageName)
 
     steps:
-    - task: Docker@2
-      displayName: Build Container
+    # - task: Docker@2
+    #   displayName: Build Container
+    #   inputs:
+    #     containerRegistry: 'ragc-vuepoc-acr'
+    #     repository: 'netcore/hello-world-net5/default'
+    #     command: 'buildAndPush'
+    #     Dockerfile: 'hello-world-net5/Dockerfile'
+    #     buildContext: 'hello-world-net5'
+    #     tags: $(Build.BuildId)
+    #     addPipelineData: true
+    - task: AzureCLI@2
       inputs:
-        containerRegistry: 'ragc-vuepoc-acr'
-        repository: 'netcore/hello-world-net5/default'
-        command: 'buildAndPush'
-        Dockerfile: 'hello-world-net5/Dockerfile'
-        buildContext: 'hello-world-net5'
-        tags: $(Build.BuildId)
-        addPipelineData: true
+        azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az acr build --image netcore/hello-world-net5/default:$(Build.BuildId) --registry ragcvuepoc --file .\Dockerfile .'
+        workingDirectory: 'hello-world-net5'
+
 
 - stage: DeployLinuxContainer
   displayName: Deploy Slim Container
