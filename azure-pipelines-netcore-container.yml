@@ -23,7 +23,7 @@ stages:
       displayName: Slim Container
       inputs:
         containerRegistry: 'ragc-vuepoc-acr'
-        repository: 'vuepoc/hello-world-netcore/netcoreslim'
+        repository: 'netcore/hello-world-net5/default'
         command: 'buildAndPush'
         Dockerfile: 'hello-world-net5/Dockerfile'
         buildContext: 'hello-world-net5'
@@ -38,7 +38,7 @@ stages:
   jobs:
   - deployment: Deploy
     displayName: Deploy
-    environment: 'VuePoC-Net5-AppSvcLinuxWebApp-SlimContainer'
+    environment: 'VuePoC-Net5-AppSvcLinux-DefaultContainer'
     pool:
       vmImage: $(vmImageName)
 
@@ -50,6 +50,6 @@ stages:
             inputs:
               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
               appName: 'ragc-vuepoc-netcore-container'
-              containers: 'ragcvuepoc.azurecr.io/vuepoc/hello-world-netcore/netcoreslim:$(Build.BuildId)'          
+              containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/default:$(Build.BuildId)'          
 
 
