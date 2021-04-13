@@ -6,7 +6,7 @@
 trigger: none
 
 variables:
-  vmImageName: ubuntu-latest
+  vmImageName: windows-latest
   buildConfiguration: 'Release'
 
 stages:
