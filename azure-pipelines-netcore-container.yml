@@ -39,26 +39,26 @@ stages:
         workingDirectory: '$(Build.SourcesDirectory)/hello-world-net5'
 
 
-- stage: DeployLinuxContainer
-  displayName: Deploy Slim Container
-  dependsOn: Build
-  condition: succeeded()
+# - stage: DeployLinuxContainer
+#   displayName: Deploy Slim Container
+#   dependsOn: Build
+#   condition: succeeded()
 
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy Container
-    environment: 'VuePoC-Net5-AppSvcLinux-DefaultContainer'
-    pool:
-      vmImage: $(vmImageName)
+#   jobs:
+#   - deployment: Deploy
+#     displayName: Deploy Container
+#     environment: 'VuePoC-Net5-AppSvcLinux-DefaultContainer'
+#     pool:
+#       vmImage: $(vmImageName)
 
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebAppContainer@1
-            inputs:
-              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
-              appName: 'ragc-vuepoc-netcore-container'
-              containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/default:$(Build.BuildId)'          
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - task: AzureWebAppContainer@1
+#             inputs:
+#               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
+#               appName: 'ragc-vuepoc-netcore-container'
+#               containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/default:$(Build.BuildId)'          
 
 
