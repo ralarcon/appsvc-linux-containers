@@ -32,7 +32,7 @@ stages:
 
 - stage: DeployLinuxContainerBlessedBuild
   displayName: Deploy Blessed Build Container
-  dependsOn: Build
+  #dependsOn: Build
   condition: succeeded()
 
   jobs:
