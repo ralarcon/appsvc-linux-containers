@@ -37,7 +37,7 @@ stages:
         inlineScript: |
           ls -la
           az acr build --image netcore/hello-world-net5/default:$(Build.BuildId) --registry ragcvuepoc --file Dockerfile .
-        workingDirectory: 'hello-world-net5'
+        workingDirectory: '$(Build.SourcesDirectory)/hello-world-net5'
 
 
 - stage: DeployLinuxContainer
