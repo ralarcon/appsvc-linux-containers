@@ -38,7 +38,7 @@ stages:
   jobs:
   - deployment: Deploy
     displayName: Deploy
-    environment: 'VuePoC-Net5-AppSvcLinuxWebApp-BlessedContainer'
+    environment: 'VuePoC-Net5-AppSvcLinuxWebApp-SlimContainer'
     pool:
       vmImage: $(vmImageName)
 
