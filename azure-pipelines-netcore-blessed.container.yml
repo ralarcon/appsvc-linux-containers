@@ -9,30 +9,30 @@ variables:
   vmImageName: ubuntu-latest
 
 stages:
-# - stage: Build
-#   displayName: Build stage
+- stage: Build
+  displayName: Build stage
 
-#   jobs:
-#   - job: Build
-#     displayName: Build
-#     pool:
-#       vmImage: $(vmImageName)
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
 
-#     steps:
-#     - task: Docker@2
-#       displayName: Blessed Build
-#       inputs:
-#         containerRegistry: 'ragc-vuepoc-acr'
-#         repository: 'vuepoc/hello-world-netcore/blessed'
-#         command: 'buildAndPush'
-#         Dockerfile: 'hello-world-net5/Blessed.Dockerfile'
-#         buildContext: 'hello-world-net5'
-#         tags: $(Build.BuildId)
-#         addPipelineData: true
+    steps:
+    - task: Docker@2
+      displayName: Blessed Build
+      inputs:
+        containerRegistry: 'ragc-vuepoc-acr'
+        repository: 'vuepoc/hello-world-netcore/blessed'
+        command: 'buildAndPush'
+        Dockerfile: 'hello-world-net5/Blessed.Dockerfile'
+        buildContext: 'hello-world-net5'
+        tags: $(Build.BuildId)
+        addPipelineData: true
 
 - stage: DeployLinuxContainerBlessedBuild
   displayName: Deploy Blessed Build Container
-  #dependsOn: Build
+  dependsOn: Build
   condition: succeeded()
 
   jobs:
@@ -50,6 +50,6 @@ stages:
             inputs:
               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
               appName: 'ragc-vuepoc-netcore-blessedcontainer'
-              containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:local1'
+              containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:$(Build.BuildId)'
 
 
