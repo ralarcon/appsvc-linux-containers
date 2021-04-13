@@ -20,7 +20,7 @@ stages:
 
     steps:
     - task: Docker@2
-      displayName: Blessed Build
+      displayName: Slim Container
       inputs:
         containerRegistry: 'ragc-vuepoc-acr'
         repository: 'vuepoc/hello-world-netcore/netcoreslim'
@@ -31,7 +31,7 @@ stages:
         addPipelineData: true
 
 - stage: DeployLinuxContainerBlessedBuild
-  displayName: Deploy Blessed Build Container
+  displayName: Deploy Slim Container
   dependsOn: Build
   condition: succeeded()
 
