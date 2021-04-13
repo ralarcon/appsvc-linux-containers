@@ -19,16 +19,16 @@ stages:
       vmImage: $(vmImageName)
 
     steps:
-    - task: Docker@2
-      displayName: Build Container
-      inputs:
-        containerRegistry: 'ragc-vuepoc-acr'
-        repository: 'netcore/hello-world-net5/default'
-        command: 'buildAndPush'
-        Dockerfile: 'hello-world-net5/Dockerfile'
-        buildContext: 'hello-world-net5'
-        tags: $(Build.BuildId)
-        addPipelineData: true
+    # - task: Docker@2
+    #   displayName: Build Container
+    #   inputs:
+    #     containerRegistry: 'ragc-vuepoc-acr'
+    #     repository: 'netcore/hello-world-net5/default'
+    #     command: 'buildAndPush'
+    #     Dockerfile: 'hello-world-net5/Dockerfile'
+    #     buildContext: 'hello-world-net5'
+    #     tags: $(Build.BuildId)
+    #     addPipelineData: true
     - task: AzureCLI@2
       inputs:
         azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
