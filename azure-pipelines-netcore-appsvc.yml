@@ -38,13 +38,13 @@ stages:
         projects: 'hello-world-net5/*.csproj'
         publishWebProjects: true
         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-        zipAfterPublish: true
+        zipAfterPublish: True
         workingDirectory: 'hello-world-net5'
 
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
+        ArtifactName: 'hello-world-net5'
   
 - stage: DeployAppSvcLinux
   displayName: Deploy AppSvc Linux Web
@@ -61,12 +61,12 @@ stages:
     strategy:
       runOnce:
         deploy:
-          steps:
+          steps:            
           - task: AzureWebApp@1
             inputs:
               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
               appType: 'webAppLinux'
               appName: 'ragc-vuepoc-netcore'
-              package: '$(Pipeline.Workspace)/drop/hello-world-net5.zip'
+              package: '$(Pipeline.Workspace)/hello-world-net5/hello-world-net5.zip'
               runtimeStack: 'DOTNETCORE|5.0'
               deploymentMethod: runFromPackage
