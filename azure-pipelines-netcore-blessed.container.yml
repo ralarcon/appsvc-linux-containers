@@ -51,5 +51,17 @@ stages:
               azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
               appName: 'ragc-vuepoc-netcore-blessedcontainer'
               containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:$(Build.BuildId)'
-
+          - task: AzureAppServiceSettings@1
+            inputs:
+              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
+              appName: 'ragc-vuepoc-netcore-blessedcontainer'
+              resourceGroupName: ragc-vuepoc-rsg
+              appSettings:  |
+                [
+                  {
+                    "name": "CONTAINER_CONFIGURED",
+                    "value": "ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:$(Build.BuildId)",
+                    "slotSetting": false
+                  }
+                ]
 
