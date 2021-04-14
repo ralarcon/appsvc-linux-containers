@@ -17,4 +17,26 @@ RUN dotnet publish "hello-world-net5.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "hello-world-net5.dll"]
+
+
+#SETUP SSH
+
+# Install OpenSSH and set the password for root to "Docker!".
+RUN apt-get update \
+     && apt-get install -y --no-install-recommends openssh-server \
+     && echo "root:Docker!" | chpasswd 
+
+COPY ssh/sshd_config /etc/ssh/
+COPY ssh/ssh_setup.sh /tmp
+
+RUN chmod -R +x /tmp/ssh_setup.sh \
+   && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null) \
+   && rm -rf /tmp/*
+
+COPY custom_start.sh /bin/
+RUN chmod 755 /bin/custom_start.sh
+
+EXPOSE 2222
+
+#ENTRYPOINT ["dotnet", "hello-world-net5.dll"]
+ENTRYPOINT [ "/bin/custom_start.sh" ]
