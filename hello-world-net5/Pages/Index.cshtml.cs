@@ -15,7 +15,7 @@ namespace hello_world_net5.Pages
 
         public IDictionary EnvVars { get; private set; }
         public string ComputerName { get; private set; } = Environment.GetEnvironmentVariable("COMPUTERNAME");
-        public string DockerImage { get; private set; } = Environment.GetEnvironmentVariable("DOCKER_CUSTOM_IMAGE_NAME");
+        public string DockerImage { get; private set; } = Environment.GetEnvironmentVariable("CONTAINER_CONFIGURED");
 
         public IndexModel(ILogger<IndexModel> logger)
         {
