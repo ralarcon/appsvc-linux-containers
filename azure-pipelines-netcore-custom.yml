@@ -20,25 +20,25 @@ stages:
 
     steps:
     - task: Docker@2
-      displayName: Blessed Build
+      displayName: Build Container
       inputs:
         containerRegistry: 'ragc-vuepoc-acr'
-        repository: 'netcore/hello-world-net5/blessed'
+        repository: 'netcore/hello-world-net5/default'
         command: 'buildAndPush'
-        Dockerfile: 'hello-world-net5/Blessed.Dockerfile'
+        Dockerfile: 'hello-world-net5/Dockerfile'
         buildContext: 'hello-world-net5'
         tags: $(Build.BuildId)
         addPipelineData: true
 
-- stage: DeployLinuxContainerBlessedBuild
-  displayName: Deploy Blessed Build Container
+- stage: DeployLinuxContainer
+  displayName: Deploy Slim Container
   dependsOn: Build
   condition: succeeded()
 
   jobs:
   - deployment: Deploy
-    displayName: Deploy
-    environment: 'VuePoC-Net5-AppSvcLinuxWebApp-BlessedContainer'
+    displayName: Deploy Container
+    environment: 'AppSvcLinux-Net5-Custom'
     pool:
       vmImage: $(vmImageName)
 
@@ -48,19 +48,19 @@ stages:
           steps:
           - task: AzureWebAppContainer@1
             inputs:
-              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
-              appName: 'ragc-vuepoc-netcore-blessedcontainer'
-              containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:$(Build.BuildId)'
+              azureSubscription: 'FTA Subscription'
+              appName: 'ragc-appsvc-linux-netcore-custom'
+              containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/default:$(Build.BuildId)'          
           - task: AzureAppServiceSettings@1
             inputs:
-              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
-              appName: 'ragc-vuepoc-netcore-blessedcontainer'
-              resourceGroupName: ragc-vuepoc-rsg
+              azureSubscription: 'FTA Subscription'
+              appName: 'ragc-appsvc-linux-netcore-custom'
+              resourceGroupName: ragc-appsvc-linux-rsg
               appSettings:  |
                 [
                   {
                     "name": "CONTAINER_CONFIGURED",
-                    "value": "ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:$(Build.BuildId)",
+                    "value": "ragcvuepoc.azurecr.io/netcore/hello-world-net5/default:$(Build.BuildId)",
                     "slotSetting": false
                   }
                 ]

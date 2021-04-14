@@ -54,7 +54,7 @@ stages:
   jobs:
   - deployment: Deploy
     displayName: Deploy
-    environment: 'VuePoC-Net5-AppSvcLinuxWebApp'
+    environment: 'AppSvcLinux-Net5'
     pool:
       vmImage: $(vmImageName)
 
@@ -64,16 +64,16 @@ stages:
           steps:            
           - task: AzureWebApp@1
             inputs:
-              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
+              azureSubscription: 'FTA Subscription'
               appType: 'webAppLinux'
-              appName: 'ragc-vuepoc-netcore'
+              appName: 'ragc-appsvc-linux-netcore'
               package: '$(Pipeline.Workspace)/hello-world-net5/hello-world-net5.zip'
               runtimeStack: 'DOTNETCORE|5.0'
           - task: AzureAppServiceSettings@1
             inputs:
-              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
-              appName: 'ragc-vuepoc-netcore-container'
-              resourceGroupName: ragc-vuepoc-rsg
+              azureSubscription: 'FTA Subscription'
+              appName: 'ragc-appsvc-linux-netcore'
+              resourceGroupName: ragc-appsvc-linux-rsg
               appSettings:  |
                 [
                   {

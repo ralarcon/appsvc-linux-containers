@@ -25,8 +25,8 @@ stages:
         containerRegistry: 'ragc-vuepoc-acr'
         repository: 'vuepoc/hello-world-vue/blessed'
         command: 'buildAndPush'
-        Dockerfile: 'hello-world/Blessed.Build.Dockerfile'
-        buildContext: 'hello-world'
+        Dockerfile: 'hello-world-vue/Blessed.Build.Dockerfile'
+        buildContext: 'hello-world-vue'
         tags: $(Build.BuildId)
         addPipelineData: true
 
@@ -38,7 +38,7 @@ stages:
   jobs:
   - deployment: Deploy
     displayName: Deploy Blessed Container
-    environment: 'Vue-AppSvcLinuxContainer-Blessed'
+    environment: 'AppSvcLinux-VueJs-Blessed'
     pool:
       vmImage: $(vmImageName)
 
@@ -48,8 +48,8 @@ stages:
           steps:
           - task: AzureWebAppContainer@1
             inputs:
-              azureSubscription: 'FTA RALARCON - Azure CXP Internal (cff5d937-9797-41da-b990-ba5295efb820)'
-              appName: 'ragc-vuepoc-blessedbuild-container'
+              azureSubscription: 'FTA Subscription'
+              appName: 'ragc-appsvc-linux-vuejs-blessed'
               containers: 'ragcvuepoc.azurecr.io/vuepoc/hello-world-vue/blessed:$(Build.BuildId)'          
 
 

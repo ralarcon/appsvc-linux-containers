@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "hello-world-net5"
+		},
+		{
+			"path": "hello-world-vue"
+		}
+	],
+	"settings": {}
+}

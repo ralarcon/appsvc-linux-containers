@@ -1,5 +1,5 @@
 {
     "cmake.configureOnOpen": false,
-    "appService.defaultWebAppToDeploy": "/subscriptions/cff5d937-9797-41da-b990-ba5295efb820/resourceGroups/ragc-vuepoc-rsg/providers/Microsoft.Web/sites/ragc-vuepoc-netcore",
+    "appService.defaultWebAppToDeploy": "/subscriptions/cff5d937-9797-41da-b990-ba5295efb820/resourceGroups/ragc-appsvc-linux-rsg/providers/Microsoft.Web/sites/ragc-appsvc-linux-netcore",
     "appService.deploySubpath": "hello-world-net5\\publish"
 }
