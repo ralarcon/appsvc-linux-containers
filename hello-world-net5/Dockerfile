@@ -15,12 +15,11 @@ FROM build AS publish
 RUN dotnet publish "hello-world-net5.csproj" -c Release -o /app/publish
 
 FROM base AS final
-WORKDIR /app
+WORKDIR /home/app
 COPY --from=publish /app/publish .
 
 
 #SETUP SSH
-
 # Install OpenSSH and set the password for root to "Docker!".
 RUN apt-get update \
      && apt-get install -y --no-install-recommends openssh-server \
@@ -38,5 +37,4 @@ RUN chmod 755 /bin/custom_start.sh
 
 EXPOSE 2222
 
-#ENTRYPOINT ["dotnet", "hello-world-net5.dll"]
 ENTRYPOINT [ "/bin/custom_start.sh" ]
