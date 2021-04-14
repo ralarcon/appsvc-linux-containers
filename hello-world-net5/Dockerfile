@@ -15,7 +15,7 @@ FROM build AS publish
 RUN dotnet publish "hello-world-net5.csproj" -c Release -o /app/publish
 
 FROM base AS final
-WORKDIR /home/app
+WORKDIR /app
 COPY --from=publish /app/publish .
 
 
