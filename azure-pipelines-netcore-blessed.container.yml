@@ -23,7 +23,7 @@ stages:
       displayName: Blessed Build
       inputs:
         containerRegistry: 'ragc-vuepoc-acr'
-        repository: 'vuepoc/hello-world-netcore/blessed'
+        repository: 'netcore/hello-world-net5/blessed'
         command: 'buildAndPush'
         Dockerfile: 'hello-world-net5/Blessed.Dockerfile'
         buildContext: 'hello-world-net5'
