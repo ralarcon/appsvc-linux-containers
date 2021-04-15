@@ -60,7 +60,7 @@ stages:
                 [
                   {
                     "name": "CONTAINER_CONFIGURED",
-                    "value": "ragcvuepoc.azurecr.io/netcore/hello-world-net5/default:$(Build.BuildId)",
+                    "value": "ragcvuepoc.azurecr.io/netcore/hello-world-net5/custom:$(Build.BuildId)",
                     "slotSetting": false
                   }
                 ]
