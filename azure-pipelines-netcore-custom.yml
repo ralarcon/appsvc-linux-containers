@@ -23,7 +23,7 @@ stages:
       displayName: Build Container
       inputs:
         containerRegistry: 'ragc-vuepoc-acr'
-        repository: 'netcore/hello-world-net5/default'
+        repository: 'netcore/hello-world-net5/custom'
         command: 'buildAndPush'
         Dockerfile: 'hello-world-net5/Dockerfile'
         buildContext: 'hello-world-net5'
@@ -50,7 +50,7 @@ stages:
             inputs:
               azureSubscription: 'FTA Subscription'
               appName: 'ragc-appsvc-linux-netcore-custom'
-              containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/default:$(Build.BuildId)'          
+              containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/custom:$(Build.BuildId)'          
           - task: AzureAppServiceSettings@1
             inputs:
               azureSubscription: 'FTA Subscription'
