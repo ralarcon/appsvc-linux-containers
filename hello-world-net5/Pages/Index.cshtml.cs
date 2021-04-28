@@ -15,7 +15,7 @@ namespace hello_world_net5.Pages
         private readonly ILogger<IndexModel> _logger;
 
         public SortedDictionary<string, string> EnvVars { get; private set; }
-        public string ComputerName { get; private set; } = Environment.GetEnvironmentVariable("COMPUTERNAME");
+        public string ComputerName { get; private set; } = Environment.MachineName;
         public string DockerImage { get; private set; } = Environment.GetEnvironmentVariable("CONTAINER_CONFIGURED");
 
         public IndexModel(ILogger<IndexModel> logger)

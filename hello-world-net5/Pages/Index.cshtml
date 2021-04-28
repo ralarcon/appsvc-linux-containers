@@ -19,6 +19,9 @@
     <h2>Container Configured</h2>
     <p>@Model.DockerImage</p>
 
+    <h2>TimeStamp</h2>
+    <p>@DateTime.Now.ToUniversalTime()</p>
+
     <h3>Environment Vars Available</h3>
     @foreach(string item in Model.EnvVars.Keys) 
     {

@@ -1,0 +1,23 @@
+
+az group create --name ragc-appsvc-linux-rsg --location westeurope
+az appservice plan create --resource-group ragc-appsvc-linux-rsg --name ragc-appsvc-linux-netcore-asp --location westeurope --is-linux --sku S1 
+az appservice plan create --resource-group ragc-appsvc-linux-rsg --name ragc-appsvc-linux-vuejs-asp --location westeurope --is-linux --sku S1 
+
+# TODO: Configure properly Azure Container Registry following commands configure the containers as Docker without user / pass
+az webapp create --resource-group ragc-appsvc-linux-rsg --plan ragc-appsvc-linux-netcore-asp --name ragc-appsvc-linux-netcore --runtime '"DOTNET|5.0"'
+az webapp create --resource-group ragc-appsvc-linux-rsg --plan ragc-appsvc-linux-netcore-asp --name ragc-appsvc-linux-netcore-custom -i ragcvueacr.azurecr.io/netcore/hello-world-net5/custom:224
+az webapp create --resource-group ragc-appsvc-linux-rsg --plan ragc-appsvc-linux-netcore-asp --name ragc-appsvc-linux-netcore-blessed -i ragcvueacr.azurecr.io/netcore/hello-world-net5/custom:224
+
+az webapp create --resource-group ragc-appsvc-linux-rsg --plan ragc-appsvc-linux-vuejs-asp --name ragc-appsvc-linux-vuejs -i ragcvueacr.azurecr.io/vuepoc/hello-world/nginx:tag
+az webapp create --resource-group ragc-appsvc-linux-rsg --plan ragc-appsvc-linux-vuejs-asp --name ragc-appsvc-linux-vuejs-custom -i ragcvueacr.azurecr.io/vuepoc/hello-world/nginx:224
+az webapp create --resource-group ragc-appsvc-linux-rsg --plan ragc-appsvc-linux-vuejs-asp --name ragc-appsvc-linux-vuejs-blessed -i ragcvueacr.azurecr.io/vuepoc/hello-world/nginx:224
+
+# Enable logging
+az webapp log config --application-logging filesystem --docker-container-logging filesystem --name ragc-appsvc-linux-netcore --web-server-logging filesystem --failed-request-tracing true --detailed-error-messages true --resource-group ragc-appsvc-linux-rsg 
+az webapp log config --application-logging filesystem --docker-container-logging filesystem --name ragc-appsvc-linux-netcore-custom --web-server-logging filesystem --failed-request-tracing true --detailed-error-messages true --resource-group ragc-appsvc-linux-rsg 
+az webapp log config --application-logging filesystem --docker-container-logging filesystem --name ragc-appsvc-linux-netcore-blessed --web-server-logging filesystem --failed-request-tracing true --detailed-error-messages true --resource-group ragc-appsvc-linux-rsg 
+az webapp log config --application-logging filesystem --docker-container-logging filesystem --name ragc-appsvc-linux-vuejs --web-server-logging filesystem --failed-request-tracing true --detailed-error-messages true --resource-group ragc-appsvc-linux-rsg 
+az webapp log config --application-logging filesystem --docker-container-logging filesystem --name ragc-appsvc-linux-vuejs-custom --web-server-logging filesystem --failed-request-tracing true --detailed-error-messages true --resource-group ragc-appsvc-linux-rsg 
+az webapp log config --application-logging filesystem --docker-container-logging filesystem --name ragc-appsvc-linux-vuejs-blessed --web-server-logging filesystem --failed-request-tracing true --detailed-error-messages true --resource-group ragc-appsvc-linux-rsg 
+
+## TODO: Enable DIagnostics-Settings

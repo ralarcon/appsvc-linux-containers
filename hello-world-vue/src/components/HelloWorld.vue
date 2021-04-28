@@ -29,6 +29,7 @@
     </ul>
   </div>
   <div class="demo">
+    <p>UPDATED!!!!</p>
     <p>Using mustaches: {{ rawHtml }}</p>
     <p>Using v-html directive: <span v-html="rawHtml"></span></p>
     <p>Docker Image: {{ imageInfo }}</p>
