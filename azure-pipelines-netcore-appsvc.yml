@@ -69,16 +69,16 @@ stages:
               appName: 'ragc-appsvc-linux-netcore'
               package: '$(Pipeline.Workspace)/hello-world-net5/hello-world-net5.zip'
               runtimeStack: 'DOTNETCORE|5.0'
-          - task: AzureAppServiceSettings@1
-            inputs:
-              azureSubscription: 'FTA Subscription'
-              appName: 'ragc-appsvc-linux-netcore'
-              resourceGroupName: ragc-appsvc-linux-rsg
-              appSettings:  |
-                [
-                  {
-                    "name": "CONTAINER_CONFIGURED",
-                    "value": "None. Directly Deployed to App Service on Linux",
-                    "slotSetting": false
-                  }
-                ]              
+          # - task: AzureAppServiceSettings@1
+          #   inputs:
+          #     azureSubscription: 'FTA Subscription'
+          #     appName: 'ragc-appsvc-linux-netcore'
+          #     resourceGroupName: ragc-appsvc-linux-rsg
+          #     appSettings:  |
+          #       [
+          #         {
+          #           "name": "CONTAINER_CONFIGURED",
+          #           "value": "None. Directly Deployed to App Service on Linux",
+          #           "slotSetting": false
+          #         }
+          #       ]              
