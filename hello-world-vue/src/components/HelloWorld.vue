@@ -29,7 +29,7 @@
     </ul>
   </div>
   <div class="demo">
-    <p>UPDATED 2!!!!</p>
+    <p>UPDATED - START With 1 Instance!!!!</p>
     <p>Using mustaches: {{ rawHtml }}</p>
     <p>Using v-html directive: <span v-html="rawHtml"></span></p>
     <p>Docker Image: {{ imageInfo }}</p>
