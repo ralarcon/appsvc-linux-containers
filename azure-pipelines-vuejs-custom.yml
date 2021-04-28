@@ -24,10 +24,8 @@ stages:
         containerRegistry: 'ragc-vuepoc-acr'
         repository: 'vuepoc/hello-world-vue/custom'
         command: 'buildAndPush'
-        Dockerfile: 'hello-world/Dockerfile'
-        buildContext: 'hello-world'
-        tags: $(Build.BuildId)
-        addPipelineData: true
+        Dockerfile: 'hello-world-vue/Dockerfile'
+        buildContext: 'hello-world-vue'
 
 - stage: DeployAppSvcLinux
   displayName: Deploy Custom Container
