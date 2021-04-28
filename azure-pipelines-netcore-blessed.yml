@@ -51,17 +51,17 @@ stages:
               azureSubscription: 'FTA Subscription'
               appName: 'ragc-appsvc-linux-netcore-blessed'
               containers: 'ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:$(Build.BuildId)'
-          - task: AzureAppServiceSettings@1
-            inputs:
-              azureSubscription: 'FTA Subscription'
-              appName: 'ragc-appsvc-linux-netcore-blessed'
-              resourceGroupName: ragc-appsvc-linux-rsg
-              appSettings:  |
-                [
-                  {
-                    "name": "CONTAINER_CONFIGURED",
-                    "value": "ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:$(Build.BuildId)",
-                    "slotSetting": false
-                  }
-                ]
+          # - task: AzureAppServiceSettings@1
+          #   inputs:
+          #     azureSubscription: 'FTA Subscription'
+          #     appName: 'ragc-appsvc-linux-netcore-blessed'
+          #     resourceGroupName: ragc-appsvc-linux-rsg
+          #     appSettings:  |
+          #       [
+          #         {
+          #           "name": "CONTAINER_CONFIGURED",
+          #           "value": "ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:$(Build.BuildId)",
+          #           "slotSetting": false
+          #         }
+          #       ]
 
