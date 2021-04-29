@@ -29,7 +29,7 @@
     </ul>
   </div>
   <div class="demo">
-    <p>UPDATED - Other Update</p>
+    <p>UPDATED - To Basic All</p>
     <p>Using mustaches: {{ rawHtml }}</p>
     <p>Using v-html directive: <span v-html="rawHtml"></span></p>
     <p>Docker Image: {{ imageInfo }}</p>
