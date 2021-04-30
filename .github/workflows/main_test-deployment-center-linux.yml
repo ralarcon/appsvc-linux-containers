@@ -18,7 +18,7 @@ jobs:
     
     - name: test
       run: |
-        mv -a ./hello-world-net5/. ./
+        cp -a ./hello-world-net5/. ./
         rm ./hello-world-net5/ -rf
       
     - name: Set up Docker Buildx
