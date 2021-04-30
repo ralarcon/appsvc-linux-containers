@@ -23,8 +23,8 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://ragcvuepoc.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_2fd4c5eb39e34325b6e6821573cb8b4a }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_c05889360ea6493987eb5f1750911bd7 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername }}
+        password: ${{ secrets.AzureAppService_ContainerPassword }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
@@ -48,5 +48,5 @@ jobs:
       with:
         app-name: 'test-deployment-center-linux'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_04f7f0a275ff471eaa28fc38bd15a877 }}
-        images: 'ragcvuepoc.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_2fd4c5eb39e34325b6e6821573cb8b4a }}/netcore/hello-world-net5/blessed:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile }}
+        images: 'ragcvuepoc.azurecr.io/${{ secrets.AzureAppService_ContainerUsername }}/netcore/hello-world-net5/blessed:${{ github.sha }}'
