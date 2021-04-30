@@ -19,7 +19,7 @@ jobs:
     - name: Copy Directory
       uses: MadaraUchiha/copy-action@0.0.1
       with:
-        source: ./hello-world-net5
+        source: ./hello-world-net5/**
         target: .
     
     - name: Set up Docker Buildx
