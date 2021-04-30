@@ -35,10 +35,8 @@ jobs:
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
-        context: .
         push: true
-        pull: true
-        tags: ${{ secrets.AzureAppService_ContainerUsername }}/netcore/hello-world-net5/blessed:${{ github.sha }}
+        tags: ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:${{ github.sha }}
         file: Blessed.Dockerfile
 
 
