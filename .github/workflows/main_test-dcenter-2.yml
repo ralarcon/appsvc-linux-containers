@@ -31,7 +31,7 @@ jobs:
       with:
         context: ./hello-world-net5
         push: true
-        tags: ${{ secrets.AzureAppService_ContainerUsername_4dc3ef044f6e49c2a371345f50d137f7 }}/netcore/hello-world-net5/blessed:${{ github.sha }}
+        tags: ragcvuepoc.azurecr.io/netcore/hello-world-net5/blessed:${{ github.sha }}
         file: ./hello-world-net5/Blessed.Dockerfile
 
   deploy:
