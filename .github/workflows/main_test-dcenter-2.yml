@@ -32,7 +32,7 @@ jobs:
         context: ./hello-world-net5
         push: true
         tags: ${{ secrets.AzureAppService_ContainerUsername_4dc3ef044f6e49c2a371345f50d137f7 }}/netcore/hello-world-net5/blessed:${{ github.sha }}
-        file: ./hello-world-net5/BlessedDockerfile
+        file: ./hello-world-net5/Blessed.Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
